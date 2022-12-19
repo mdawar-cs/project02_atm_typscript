@@ -1,5 +1,9 @@
+#! /usr/bin/env node
+
 import inquirer from "inquirer";
 import chalk from "chalk";
+
+console.log("Enter any username and any pin");
 
 type UserInfo = {
   userID: string;
