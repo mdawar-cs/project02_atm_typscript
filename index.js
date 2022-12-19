@@ -1,10 +1,12 @@
+#! /usr/bin/env node
 import inquirer from "inquirer";
 import chalk from "chalk";
+console.log("Enter any username and any pin");
 const userInput = await inquirer.prompt([
     {
         name: "userID",
         type: "string",
-        message: "Please provide your User ID"
+        message: "Please provide your User ID",
     },
     {
         name: "pinCode",
@@ -17,10 +19,10 @@ const userInput = await inquirer.prompt([
 ]);
 const newUser = {
     userID: userInput.userID,
-    pinCode: userInput.pinCode
+    pinCode: userInput.pinCode,
 };
 let balanceAmount = Math.floor(Math.random() * 100000);
-console.log(balanceAmount);
+// console.log(balanceAmount);
 async function doTransaction() {
     console.clear();
     console.log(chalk.bgBlue(`Welcome to Bank ${newUser.userID}\n`));
@@ -47,7 +49,7 @@ async function doTransaction() {
             when(answers) {
                 return answers.transactionOption == "Withdrawl";
             },
-        }
+        },
     ]);
     newTransaction.date = new Date();
     switch (newTransaction.transactionOption) {
@@ -87,15 +89,13 @@ async function doTransaction() {
 async function runAgain() {
     do {
         await doTransaction();
-        var again = await inquirer
-            .prompt([
+        var again = await inquirer.prompt([
             {
-                type: 'input',
-                name: 'restart',
-                message: "Do you want to continue to new Transaction? Press y or Y"
-            }
+                type: "input",
+                name: "restart",
+                message: "Do you want to continue to new Transaction? Press y or Y",
+            },
         ]);
-    } while (again.restart == 'y' || again.restart == 'Y');
+    } while (again.restart == "y" || again.restart == "Y");
 }
 await runAgain();
-// console.log(balanceAmount);
